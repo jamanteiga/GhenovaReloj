@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Ghenova Horas</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <style>
+        body { font-family: -apple-system, sans-serif; background-color: #F4F4F4; padding: 20px; display: flex; flex-direction: column; align-items: center; }
+        .card { background: white; padding: 20px; border-radius: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); width: 100%; max-width: 350px; }
+        h2 { color: #004A99; text-align: center; margin-bottom: 25px; }
+        .row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+        label { font-weight: 500; color: #333; }
+        input { width: 100px; padding: 10px; border: 1px solid #ddd; border-radius: 8px; text-align: center; font-size: 16px; }
+        button { width: 100%; background-color: #004A99; color: white; border: none; padding: 15px; border-radius: 10px; font-size: 16px; font-weight: bold; margin-top: 20px; cursor: pointer; }
+        #resultado { margin-top: 20px; padding: 15px; border: 2px solid #004A99; border-radius: 10px; text-align: center; color: darkgreen; font-weight: bold; font-size: 20px; display: none; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2>Ghenova Horas</h2>
+        <div class="row"><label>Lunes</label><input type="text" id="dia0" value="08:30"></div>
+        <div class="row"><label>Martes</label><input type="text" id="dia1" value="08:30"></div>
+        <div class="row"><label>Miércoles</label><input type="text" id="dia2" value="08:30"></div>
+        <div class="row"><label>Jueves</label><input type="text" id="dia3" value="08:30"></div>
+        <div class="row"><label>Entrada Vie.</label><input type="text" id="dia4" value="07:30"></div>
+        <button onclick="calcular()">CALCULAR SALIDA</button>
+        <div id="resultado"></div>
+    </div>
+    <script>
+        window.onload = () => {
+            for(let i=0; i<5; i++) {
+                const saved = localStorage.getItem('dia' + i);
+                if(saved) document.getElementById('dia' + i).value = saved;
+            }
+        };
+        function calcular() {
+            let objetivo = 41.0;
+            let sumaHoras = 0;
+            for(let i=0; i<4; i++) {
+                let val = document.getElementById('dia' + i).value;
+                localStorage.setItem('dia' + i, val);
+                let [h, m] = val.split(':').map(Number);
+                if ((h + m/60) === 0) objetivo -= 8.5;
+                else sumaHoras += (h + m/60);
+            }
+            let entVie = document.getElementById('dia4').value;
+            localStorage.setItem('dia4', entVie);
+            let [hV, mV] = entVie.split(':').map(Number);
+            let restante = objetivo - sumaHoras;
+            let salidaTotalMinutos = (hV * 60 + mV) + (restante * 60);
+            let resH = Math.floor(salidaTotalMinutos / 60);
+            let resM = Math.round(salidaTotalMinutos % 60);
+            let resDiv = document.getElementById('resultado');
+            resDiv.style.display = 'block';
+            resDiv.innerHTML = `SALIDA: ${resH}:${resM < 10 ? '0'+resM : resM}`;
+        }
+    </script>
+</body>
+</html>
