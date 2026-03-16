@@ -12,8 +12,9 @@
         body { font-family: -apple-system, sans-serif; margin: 0; padding: 20px; background-color: #f4f7f9; }
         .card { background: white; padding: 20px; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); max-width: 400px; margin: auto; }
         .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-        h2 { color: #004A95; margin: 0; font-size: 18px; }
-        select { padding: 5px; border-radius: 5px; border: 1px solid #ccc; font-size: 14px; }
+        .logo-img { width: 40px; height: 40px; border-radius: 8px; object-fit: cover; }
+        h2 { color: #004A95; margin: 0; font-size: 18px; flex-grow: 1; margin-left: 10px; }
+        select { padding: 5px; border-radius: 5px; border: 1px solid #ccc; font-size: 14px; background: white; }
         .row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
         input { width: 90px; padding: 10px; text-align: center; border: 1px solid #ddd; border-radius: 8px; font-size: 16px; }
         input:disabled { background: #eee; color: #999; border: 1px dashed #bbb; }
@@ -25,10 +26,12 @@
 <body>
     <div class="card">
         <div class="header">
+            <img src="icon.png" alt="Logo" class="logo-img" onerror="this.style.display='none'">
             <h2>Ghenova HVAC</h2>
             <select id="langSelect" onchange="cambiarIdioma()">
                 <option value="es">ESP 🇪🇸</option>
-                <option value="en">ENG 🇬🇧</option>
+                <option value="gl">GLG 🇬🇧</option>
+                <option value="en">ENG 🇺🇸</option>
             </select>
         </div>
 
@@ -37,79 +40,4 @@
         <div class="row"><label id="lbl0">Lunes</label><input type="text" id="txt0" value="08:30"></div>
         <div class="row"><label id="lbl1">Martes</label><input type="text" id="txt1" value="08:30"></div>
         <div class="row"><label id="lbl2">Miércoles</label><input type="text" id="txt2" value="08:30"></div>
-        <div class="row"><label id="lbl3">Jueves</label><input type="text" id="txt3" value="08:30"></div>
-
-        <div style="border-top: 1px solid #eee; margin: 15px 0; padding-top: 15px; text-align: center;">
-            <label id="lblEntrada" style="color: #004A95; font-weight: bold; display: block; margin-bottom: 5px;">Entrada Viernes</label>
-            <input type="text" id="txtEntradaFinal" value="06:30">
-        </div>
-
-        <div class="result-box">
-            <div id="lblSalida" style="font-size: 14px; opacity: 0.9;">HORA DE SALIDA ESTIMADA</div>
-            <span id="resultado">--:--</span>
-        </div>
-    </div>
-
-    <script>
-        const festivos = ["2026-01-01", "2026-01-06", "2026-03-19", "2026-04-02", "2026-04-03", "2026-05-01", "2026-12-25"];
-        
-        const textos = {
-            es: { days: ["Lunes", "Martes", "Miércoles", "Jueves"], entrada: "Entrada Viernes", salida: "HORA DE SALIDA ESTIMADA", semana: "Semana del " },
-            en: { days: ["Monday", "Tuesday", "Wednesday", "Thursday"], entrada: "Friday Arrival", salida: "ESTIMATED DEPARTURE TIME", semana: "Week of " }
-        };
-
-        function cambiarIdioma() {
-            const lang = document.getElementById('langSelect').value;
-            for(let i=0; i<4; i++) document.getElementById('lbl'+i).innerText = textos[lang].days[i];
-            document.getElementById('lblEntrada').innerText = textos[lang].entrada;
-            document.getElementById('lblSalida').innerText = textos[lang].salida;
-            actualizarInfoSemana(lang);
-        }
-
-        function getLunesActual() {
-            let d = new Date();
-            let day = d.getDay(), diff = d.getDate() - day + (day == 0 ? -6 : 1);
-            return new Date(d.setDate(diff));
-        }
-
-        function actualizarInfoSemana(lang) {
-            const lunes = getLunesActual();
-            document.getElementById('infoSemana').innerText = textos[lang].semana + lunes.toLocaleDateString();
-        }
-
-        function toMin(s) {
-            const p = s.split(':');
-            return (parseInt(p[0]) * 60) + (p[1] ? parseInt(p[1]) : 0);
-        }
-
-        function calcular() {
-            const lunes = getLunesActual();
-            let objetivoMin = 41 * 60;
-            let acumuladoMin = 0;
-
-            for (let i = 0; i < 4; i++) {
-                let f = new Date(lunes); f.setDate(lunes.getDate() + i);
-                let iso = f.toISOString().split('T')[0];
-                let input = document.getElementById('txt' + i);
-                if (festivos.includes(iso)) {
-                    input.value = "00:00"; input.disabled = true;
-                    objetivoMin -= 510;
-                } else {
-                    acumuladoMin += toMin(input.value);
-                }
-            }
-
-            let v = new Date(lunes); v.setDate(lunes.getDate() + 4);
-            if (festivos.includes(v.toISOString().split('T')[0])) objetivoMin -= 420;
-
-            const totalMin = toMin(document.getElementById('txtEntradaFinal').value) + (objetivoMin - acumuladoMin);
-            const h = Math.floor(totalMin / 60);
-            const m = totalMin % 60;
-            document.getElementById('resultado').innerText = (h < 0 ? "00" : h).toString().padStart(2, '0') + ":" + Math.abs(m).toString().padStart(2, '0');
-        }
-
-        document.querySelectorAll('input').forEach(inp => inp.onkeyup = calcular);
-        window.onload = () => { cambiarIdioma(); calcular(); };
-    </script>
-</body>
-</html>
+        <div class="row"><label id="lbl3">
