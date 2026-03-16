@@ -11,26 +11,26 @@
     <style>
         body { font-family: -apple-system, sans-serif; margin: 0; padding: 20px; background-color: #f4f7f9; }
         .card { background: white; padding: 20px; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); max-width: 400px; margin: auto; }
-        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-        .logo-img { width: 40px; height: 40px; border-radius: 8px; object-fit: cover; }
+        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 2px solid #004A95; padding-bottom: 10px; }
+        .logo-img { width: 45px; height: 45px; border-radius: 8px; }
         h2 { color: #004A95; margin: 0; font-size: 18px; flex-grow: 1; margin-left: 10px; }
-        select { padding: 5px; border-radius: 5px; border: 1px solid #ccc; font-size: 14px; background: white; }
+        select { padding: 6px; border-radius: 5px; border: 1px solid #004A95; font-size: 14px; background: white; color: #004A95; font-weight: bold; }
         .row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
-        input { width: 90px; padding: 10px; text-align: center; border: 1px solid #ddd; border-radius: 8px; font-size: 16px; }
-        input:disabled { background: #eee; color: #999; border: 1px dashed #bbb; }
+        input { width: 95px; padding: 10px; text-align: center; border: 1px solid #ddd; border-radius: 8px; font-size: 16px; background: #fff; }
+        input:disabled { background: #ffebee; color: #c62828; border: 1px dashed #c62828; font-weight: bold; }
         .result-box { background: #004A95; color: white; padding: 20px; border-radius: 12px; text-align: center; margin-top: 20px; }
-        #resultado { font-size: 48px; font-weight: bold; display: block; }
-        .semana-info { text-align: center; font-size: 13px; color: #666; margin-bottom: 15px; }
+        #resultado { font-size: 48px; font-weight: bold; display: block; margin-top: 5px; }
+        .semana-info { text-align: center; font-size: 13px; color: #666; margin-bottom: 15px; font-weight: bold; }
     </style>
 </head>
 <body>
     <div class="card">
         <div class="header">
-            <img src="icon.png" alt="Logo" class="logo-img" onerror="this.style.display='none'">
+            <img src="icon.png" alt="Logo" class="logo-img" onerror="this.src='https://via.placeholder.com/45/004A95/FFFFFF?text=G'">
             <h2>Ghenova HVAC</h2>
             <select id="langSelect" onchange="cambiarIdioma()">
                 <option value="es">ESP 🇪🇸</option>
-                <option value="gl">GLG 🇬🇧</option>
+                <option value="gl">GAL 🇪🇸</option>
                 <option value="en">ENG 🇺🇸</option>
             </select>
         </div>
@@ -40,4 +40,6 @@
         <div class="row"><label id="lbl0">Lunes</label><input type="text" id="txt0" value="08:30"></div>
         <div class="row"><label id="lbl1">Martes</label><input type="text" id="txt1" value="08:30"></div>
         <div class="row"><label id="lbl2">Miércoles</label><input type="text" id="txt2" value="08:30"></div>
-        <div class="row"><label id="lbl3">
+        <div class="row"><label id="lbl3">Jueves</label><input type="text" id="txt3" value="08:30"></div>
+
+        <div
