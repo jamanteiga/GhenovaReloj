@@ -5,11 +5,13 @@
     {
       "src": "icon.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     }
   ],
   "start_url": "index.html",
   "display": "standalone",
   "background_color": "#004A95",
-  "theme_color": "#004A95"
+  "theme_color": "#004A95",
+  "orientation": "portrait"
 }
