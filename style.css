@@ -1,0 +1,153 @@
+/* --- VARIABLES DE MARCA GHENOVA Y COLORES iOS --- */
+:root {
+    --ghenova-blue: #004A95;
+    --ios-bg: #f2f2f7;
+    --white: #ffffff;
+    --text-dark: #000000;
+    --text-gray: #8e8e93;
+    --border-color: #c6c6c8;
+}
+
+/* --- CONFIGURACIÓN BASE --- */
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent; /* Quita el destello azul al tocar en iPhone */
+}
+
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: #333; /* Fondo oscuro para resaltar el "móvil" en escritorio */
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+/* --- CONTENEDOR PRINCIPAL (EL "IPHONE") --- */
+.app-container {
+    background-color: var(--white);
+    width: 100%;
+    max-width: 430px; /* Ancho máximo de un iPhone Pro Max */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 0 30px rgba(0,0,0,0.5);
+    position: relative;
+}
+
+/* --- HEADER --- */
+header {
+    padding-top: env(safe-area-inset-top, 20px); /* Soporte para el Notch */
+    padding-bottom: 15px;
+    background-color: var(--white);
+    border-bottom: 1px solid var(--border-color);
+    text-align: center;
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 10px;
+}
+
+.header-content img {
+    height: 35px;
+    width: auto;
+}
+
+.header-content h1 {
+    color: var(--ghenova-blue);
+    font-size: 20px;
+    margin: 0;
+    font-weight: 700;
+}
+
+/* --- CUERPO DE LA APP --- */
+main {
+    padding: 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Selector de Idioma */
+.selector-idioma {
+    display: flex;
+    justify-content: flex-end;
+}
+
+select {
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    background-color: var(--ios-bg);
+    font-size: 14px;
+    outline: none;
+}
+
+.semana-label {
+    text-align: center;
+    color: var(--ghenova-blue);
+    font-weight: 600;
+    font-size: 16px;
+}
+
+/* --- GRID DE DÍAS (COMO EN MAUI) --- */
+.grid-dias {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.dia-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 0;
+}
+
+.dia-row label {
+    font-size: 17px;
+    color: var(--text-dark);
+}
+
+/* Estilo de los Entry (Inputs) */
+input {
+    width: 90px;
+    height: 40px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 500;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+input:focus {
+    border-color: var(--ghenova-blue);
+    background-color: #f0f7ff;
+}
+
+input:disabled {
+    background-color: #f0f0f0;
+    color: var(--text-gray);
+    opacity: 0.5;
+    border-style: dashed;
+}
+
+/* --- ENTRADA VIERNES --- */
+.entrada-final {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.entrada-final label {
+    font-weight: 700;
+    color: var(--ghenova-blue);

@@ -1,15 +1,23 @@
 {
-  "short_name": "RelojHVAC",
-  "name": "Ghenova Reloj HVAC",
+  "short_name": "Ghenova",
+  "name": "Ghenova HVAC Reloj",
   "icons": [
     {
-      "src": "icon.png",
+      "src": "icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "icon-512.png",
+      "type": "image/png",
       "sizes": "512x512",
-      "type": "image/png"
+      "purpose": "any maskable"
     }
   ],
   "start_url": "index.html",
+  "background_color": "#004A95",
   "display": "standalone",
-  "background_color": "#f0f2f5",
-  "theme_color": "#004A95"
+  "scope": "/",
+  "theme_color": "#004A95",
+  "description": "Calculadora de horarios para Ghenova HVAC Ferrol"
 }
