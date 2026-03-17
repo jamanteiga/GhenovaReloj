@@ -3,15 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Ghenova HVAC - PWA</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Ghenova HVAC</title>
+    
     <link rel="stylesheet" href="css/style.css">
     <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="icon-192.png">
 </head>
 <body>
     <div class="app-container">
         <header>
             <div class="header-content">
-                <img src="logo_ghenova.png" alt="Logo">
+                <img src="logo_ghenova.png" alt="Ghenova Logo">
                 <h1>Ghenova HVAC</h1>
             </div>
         </header>
@@ -19,29 +23,43 @@
         <main>
             <div class="selector-idioma">
                 <select id="pickerIdioma">
-                    <option>ES</option>
-                    <option>GL</option>
-                    <option>EN</option>
+                    <option value="Español">Español</option>
+                    <option value="Galego">Galego</option>
+                    <option value="English">English</option>
                 </select>
             </div>
 
-            <div id="lblSemana" class="semana-label">Semana del 30/03/2026</div>
+            <p id="lblSemana" class="semana-label">Cargando semana...</p>
 
             <div class="grid-dias">
                 <div class="dia-row">
-                    <label>Lunes</label>
-                    <input type="text" value="08:30" inputmode="numeric">
+                    <label for="txtLunes">Lunes</label>
+                    <input type="text" id="txtLunes" inputmode="numeric">
                 </div>
+                <div class="dia-row">
+                    <label for="txtMartes">Martes</label>
+                    <input type="text" id="txtMartes" inputmode="numeric">
                 </div>
-
-            <div class="entrada-final">
-                <label>Entrada Viernes</label>
-                <input type="text" value="06:30" inputmode="numeric">
+                <div class="dia-row">
+                    <label for="txtMiercoles">Miércoles</label>
+                    <input type="text" id="txtMiercoles" inputmode="numeric">
+                </div>
+                <div class="dia-row">
+                    <label for="txtJueves">Jueves</label>
+                    <input type="text" id="txtJueves" inputmode="numeric">
+                </div>
             </div>
 
+            <div class="entrada-final">
+                <label id="lblEntradaFinal" for="txtEntradaFinal">Entrada Viernes</label>
+                <input type="text" id="txtEntradaFinal" value="06:30" inputmode="numeric">
+            </div>
+
+            <button class="btn-reset" onclick="location.reload()">Resetear Semana</button>
+
             <div class="resultado-panel">
-                <p id="lblDiaSalida">SALIDA VIERNES 03/04</p>
-                <h2 id="lblResultado">14:15</h2>
+                <p id="lblDiaSalida">SALIDA --/--</p>
+                <h2 id="lblResultado">--:--</h2>
             </div>
         </main>
     </div>
